@@ -1,8 +1,9 @@
-package glp;
+package glp1;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class Base extends JPanel {
+import glp1.Simulationutility;
+public class Base extends JPanel implements ActionListener {
 
 
 	public Base() {
@@ -26,10 +29,12 @@ public class Base extends JPanel {
     private ImageIcon photo;
     private JButton powerboutton;
     private JButton heightboutton;
+    Image image;
+    private int positionx=0;
+	private int posistiony=0;
+    private int INITIAL_POSITIONY = 600;
     
-
-	
-    
+    Timer tm =new Timer(5,this);
     public void proprietebase() {
     
     	this.setLayout(null);
@@ -37,32 +42,33 @@ public class Base extends JPanel {
     	this.speed();
     	this.height();
     	this.power();*/
-    	this.afficheimage();
+    	
     	/*this.initaction();*/
     }
-    
+	
     public JLabel getimagelbl() {
     	
     	return imagelbl;
     }
     private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
-	public void paintConpoFontnment(Graphics g) {
+	public void paintComponent(Graphics g) {
         
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.drawLine(10, 90,300,200);
-
+		/*g.setColor(Color.BLUE);
+		g.drawLine(10, 90,300,200);*/
+    
+		g.drawImage(Simulationutility.readImage("src/glp1/fusee2.jpg"),700,INITIAL_POSITIONY ,null);
+	    tm.start();
 	}
-	/*
-	private void initaction() {
-		
-	powerboutton.addActionListener(new PowerAction() );	
-	heightboutton.addActionListener(new HeightAction());	
-		
-	}*/
 
-	private int positionx=750;
-	private int posistiony=400;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		INITIAL_POSITIONY=INITIAL_POSITIONY-posistiony;
+		// TODO Auto-generated method stub
+		repaint();
+	}
+    /*
 	
     public void afficheimage() {
  		
@@ -74,7 +80,7 @@ public class Base extends JPanel {
 	    this.imagelbl.setIcon(photo);
 	    this.add(imagelbl);
 	}
-	
+	*/
 	public int getposistionx() {
 		
 	 return positionx;	
@@ -84,7 +90,7 @@ public class Base extends JPanel {
 	public int getpositiony() {
 		
 		
-	return posistiony;	
+	return INITIAL_POSITIONY;	
 		
 	}
 	
@@ -100,93 +106,9 @@ public class Base extends JPanel {
 		
 		
 	}
-	/*
-	private void afficheimage() {
-		
-		imagelbl= new JLabel();
-		photo=new ImageIcon("image/fusee2.jpg");
+
+
 	
-		
-		this.imagelbl.setBounds(positionx,posistiony,230,230);
-	    this.imagelbl.setIcon(photo);
-	    this.add(imagelbl);
-	}
 	
-	/*
-    private void start() {
-   	 
-   	 
-   	 startlabel=new JLabel();
-   	 this.startlabel.setBounds(10, 90, 70, 20);
-        this.startlabel.setText("start");
-        this.add(startlabel);
-    }
-    
-    private void speed() {
-      	 
-      	 
-    	speedlabel=new JLabel();
-      	 this.speedlabel.setBounds(10, 180, 70, 20);
-           this.speedlabel.setText("speed");
-           this.add(speedlabel);
-       }
-    private void height() {
-     	 
-     	 
-    	heightlabel=new JLabel();
-      	 this.heightlabel.setBounds(10, 150, 70, 20);
-           this.heightlabel.setText("height");
-           this.add(heightlabel);
-       }
-    
-    
-    private void power() {
-    	 
-    	 
-    	powerlabel=new JLabel();
-      	 this.powerlabel.setBounds(10, 120, 70, 20);
-           this.powerlabel.setText("power");
-           this.add(powerlabel);
-       }
-    
+	
 }
-    /*
-    public class PowerAction implements ActionListener {
-    	
-    	public void actionPerformed(ActionEvent e) {
-    		
-    		
-    	String	power=powerlabel.getText();
-    		
-    		
-    	}
-    }
-    public class HeightAction implements ActionListener{
-    	public void actionPerformed(ActionEvent e) {
-    		
-    	String height=heightlabel.getText();	
-    		
-    		
-    	
-    }*/
-    	
-}
-    	
-    	
-    	
-    	
-    	
-    	
-    
-     
-    
-    
-    
-/*
-	public static void main(String[] args) {
-		new Base();
-	}
-
-*/
-
-

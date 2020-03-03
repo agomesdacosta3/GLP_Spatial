@@ -1,4 +1,4 @@
-package glp;
+package glp1;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-import glp.Base;
+import glp1.Base;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import glp.RocketEarth;
+import glp1.RocketEarth;
 
 
 public class Lancement2 extends JFrame  {
@@ -60,17 +60,15 @@ public class Lancement2 extends JFrame  {
     	 public void actionPerformed(ActionEvent e) {
   			
   			String power1=powerfield.getText();
-      		String height1=heightfield.getText();
+      		String weight1=weightfield.getText();
       		
       		int power=Integer.valueOf(power1);
-      		int height=Integer.valueOf(height1);
+      		int weight=Integer.valueOf(weight1);
       		
       	   TrajectoryEarth traj=new TrajectoryEarth();  
-      	 /* traj.launch(power,height);/*
-  	      System.out.println("power="+power+"height="+height+""); 
-      	  */
+      
       	  try {
- 				updatevalues(height,power);
+ 				updatevalues(weight,power);
  			} catch (NotEngoughPowerException e1) {
  				// TODO Auto-generated catch block
  				e1.printStackTrace();
@@ -86,15 +84,15 @@ public class Lancement2 extends JFrame  {
      
      private JLabel messagelabel=new JLabel("everything is OK!");
      
-     private JTextField heightfield=new JTextField(10);
+     private JTextField weightfield=new JTextField(10);
      private JTextField powerfield=new JTextField(10);
      private JPanel pan=new JPanel();
    
      
-     private int height=10   /*Integer.valueOf(heightfield.getText())*/; 
+     private int height=10  ; 
  	private int power=1000 ;/*Integer.valueOf(powerfield.getText() );*/
      
-     private  String height1= heightfield.getText(); 
+     private  String weight1= weightfield.getText(); 
     private  String  power1  =powerfield.getText();  
      
      public String getpower1() {
@@ -104,10 +102,10 @@ public class Lancement2 extends JFrame  {
     	 
      }
      
-     public String getheight1() {
+     public String getweight1() {
     	 
     	 
-    	return height1;
+    	return weight1;
     	 
      }
      public String getpower() {
@@ -120,7 +118,7 @@ public class Lancement2 extends JFrame  {
       public String getheight() {
      	 
      	 
-     	return height1;
+     	return weight1;
      	 
       }
 
@@ -146,7 +144,7 @@ public class Lancement2 extends JFrame  {
      private void init() throws NotEngoughPowerException {
     	
     	
-    	
+    
     	 Container contentPane = getContentPane();
     	 contentPane.setLayout(new BorderLayout());
     	
@@ -172,7 +170,7 @@ public class Lancement2 extends JFrame  {
      
      speedvalue.setFont(font);
      pan.add(speedvalue);
-     
+     /*
      this.base.afficheimage();
       /*
      imagelbl.setFont(font1);
@@ -200,8 +198,8 @@ public class Lancement2 extends JFrame  {
      
     
      
-     heightfield.setFont(font);
-     pan.add(heightfield);
+     weightfield.setFont(font);
+     pan.add(weightfield);
 
    
      
@@ -254,7 +252,7 @@ public class Lancement2 extends JFrame  {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		String height=heightfield.getText(); 
+		String height=weightfield.getText(); 
     	
 	}
     	 
@@ -275,51 +273,11 @@ public class Lancement2 extends JFrame  {
  	}
  	*/
  	
-     private void start() {
-    	 
-    	 
-    	 startlabel=new JLabel();
-    	 this.startlabel.setBounds(10, 50, 70, 20);
-         this.startlabel.setText("start");
-         this.add(startlabel);
-     }
+
      
-     private void speed() {
-       	 
-       	 
-     	speedlabel=new JLabel();
-       	 this.speedlabel.setBounds(10, 90, 70, 20);
-            this.speedlabel.setText("speed");
-            this.add(speedlabel);
-        }
-     private void height() {
-      	 
-      	 
-     	heightlabel=new JLabel();
-       	 this.heightlabel.setBounds(10, 120, 70, 20);
-            this.heightlabel.setText("height");
-            this.add(heightlabel);
-        }
+
      
-     
-     private void power() {
-     	 
-     	 
-     	powerlabel=new JLabel();
-       	 this.powerlabel.setBounds(10,140, 70, 20);
-            this.powerlabel.setText("power");
-            this.add(powerlabel);
-        }
-     
-     /*
-     private void powerbutton() {
-    	 
-    	 this.powerboutton=new JButton();
-    	 this.powerboutton.setBounds(10,160,20,20);
-    	 this.powerboutton.setText("power");
-         this.add(powerboutton);
-     }
-     */
+
 
      
      private void updatevalues(int height,int power) throws NotEngoughPowerException {
@@ -330,21 +288,15 @@ public class Lancement2 extends JFrame  {
 	result = rocket.trajectory(height, power, t);
 
 	
-	while(result<120000) {
+	while(result<600) {/*une unité dans l' interface représente deux km dans la vraie vie 1 seconde dans l' IHM correspond à 14,05 s dans la vie*/
 	
-		
-	
-   /*if(checkmaj(height1 , power1)==true) {*/
-	/*int positionx=rocket.trajectory();*/ 
 		
 	base.setpositiony((int)(result));
-	 base.repaint();
+	/*
+	base.repaint();
+	/*
 	base.afficheimage();
-    /*this.imagelbl.setBounds( this.imagelbl.getX() ,(int)(result),this.imagelbl.getWidth() ,this.imagelbl.getHeight() );	*/ 
-    /*base.setpositionx((int)trajectory(height, power));
-    base.setpositiony((int)trajectory(height, power));*/
-   /* imagelbl.repaint();*/
-  /*  base.repaint();*/
+  */
     
     chrono.increment();
     t=chrono.getValue();
@@ -352,11 +304,6 @@ public class Lancement2 extends JFrame  {
    result=(int)(rocket.trajectory(height, power,t)); 
    
    
-  /* }
-    else {
-    	
-    	updatestandardmessage("enter a number");
-    } */
 	 }
 	 updatestandardmessage("we are in the space");
 	 }
@@ -368,206 +315,13 @@ public class Lancement2 extends JFrame  {
      
 	private static final long serialVersionUID = 1L;  
 
-    /*
-    public boolean checkmaj(String height1 ,String power1) {
-    	 height1= heightfield.getText(); 
-    	  power1  =powerfield.getText();
-    	final char[] chars = height1.toCharArray();
- 	    final char[] chars1 = power1.toCharArray();
- 	   int i=0;
-	    for(i=0;i<chars.length;i++) {
-	    	 if ((chars1[i]>='0'&& chars1[i]<='9')   && (chars[i] >= '0' && chars[i] <= '9')) {    
-	 		int	height = Integer.valueOf(heightfield.getText()); 
-	 		 int     power  =Integer.valueOf(powerfield.getText());
-	    	   
-	    	 return true;
-	    	 }  	
-	    	
-	    		 
-	    	 
-	    		 
-	    	 }
-	         
-	         return false;
-    }
-	*/
-    
 
-    /*
-    public double trajectory(int height,int power) {
-    
-    
-    	String height1 =  heightfield.getText(); 
-	    String  power1  =powerfield.getText();
-	    
-	    final char[] chars = height1.toCharArray();
-	    final char[] chars1 = power1.toCharArray();
-	   
-	    int i=0;
-	    for(i=0;i<chars.length;i++) {
-	    if ((chars1[i]>='0'&& chars1[i]<='9')   && (chars[i] >= '0' && chars[i] <= '9')) {    
-			height = Integer.valueOf(/*heightfield.getText()height1); 
-		      power  =Integer.valueOf(/*powerfield.getText() power1);
-	    	
-	    	
-	    	if((!(height==0))&&(!(power ==0))) {
-		try{
-			 height = Integer.valueOf(heightfield.getText()); 
-		     power  =Integer.valueOf(powerfield.getText());	
-		 
-		 
-		if(height<=0) {
-			updatestandardmessage("le poids doit etre positif et non nul");
-			/*throw new IllegalArgumentException("le poids doit etre positif et non nul ");
-			
-		}
-		if(power<height) {
-			updatestandardmessage("We need more power to take off the rocket");
-		   /* throw new IllegalArgumentException("We need more power to take off the rocket");	
-		
-		}
-		
-		else {
-			
-			
-			return ((power/height)*Math.pow(t,2.0))/2+positiony;
-		
-		}
-	
-		}catch(NumberFormatException number){
-			
-			updatestandardmessage("please enter a number");
-			System.out.println("please enter a number !");
-			
-		
-			
-		}
-		
-		}else{
-		
-			updatestandardmessage("the field is empty");
-			throw new NumberFormatException("the field is empty!");	
-			/*updatestandardmessage("the field is empty!");
-			
-		}
-	      }
-	    else {
-	    	 
-	    	 
-	    	 throw new NumberFormatException("it is not a number");
-	    	 
-	    	 
-	     }
-    	
-    }*/
+
 	  
     public double trajectory(int height,int power) {
     return ((power/height)*Math.pow(t,2.0))/2+positiony;
     }
-    /*
-    private class Calculateposition/*(int height,int power) implements ActionListener{
-		 
-		double position;
-		@Override
-		public void actionPerformed(ActionEvent e)  {
-		String height1 =  heightfield.getText(); 
-	    String  power1  =powerfield.getText();
-	    
-	    final char[] chars = height1.toCharArray();
-	    final char[] chars1 = power1.toCharArray();
-	   
-	    int i=0;
-	    for(i=0;i<chars.length;i++) {
-	    if ((chars1[i]>='0'&& chars1[i]<='9')   && (chars[i] >= '0' && chars[i] <= '9')) {    
-			height = Integer.valueOf(heightfield.getText()); 
-		      power  =Integer.valueOf(powerfield.getText() );
-	          RocketEarth rocket= new RocketEarth(height,power);    	
-	    	  
-	    	if((!(height==0))&&(!(power ==0))) {
-		try{
-			 height = Integer.valueOf(heightfield.getText()); 
-		     power  =Integer.valueOf(powerfield.getText());	
-		 
-		 
-		if(height<=0) {
-			updatestandardmessage("le poids doit etre positif et non nul");
-			/*throw new IllegalArgumentException("le poids doit etre positif et non nul ");
-			
-		}
-		if(power<height) {
-			updatestandardmessage("We need more power to take off the rocket");
-		  /* throw new IllegalArgumentException("We need more power to take off the rocket");	
-		
-		}
-		
-		else {
-			
-			
-			 position=trajectory(height,power);
-		
-		}
-	
-		}catch(NumberFormatException number){
-			
-			updatestandardmessage("please enter a number"); */
-			/*System.out.println("please enter a number !");*/
-			/*throw new NumberFormatException("please enter a number !"); 
-		
-			
-		}
-		
-		}else{
-		
-			updatestandardmessage("the field is empty");
-			throw new NumberFormatException("the field is empty!");	*/
-			/*updatestandardmessage("the field is empty!");
-			
-		}
-	      }
-	    else {
-	    	 
-	    	 
-	    	 throw new NumberFormatException("it is not a number");
-	    	 
-	    	 
-	     }
-	}
-		
-	 
-	    
-			// TODO Auto-generated method stub
-		}			
-		}
-           */
-       /*
-		 private double getposition() {
-			 
-			 return position;
-			 
-		 }
-	     */
-/*
-     public void setposistionx(int positionx) {
-    	 
-    	 
-    	this.posistionx=positionx; 
-    	 
-     }
 
-     public void setpositiony(int posistiony) {
-    	 
-    	this.positiony=posistiony; 
-    	 
-     }
-*/
-   public void paintcomponment(Graphics g) {
-	   
-	   g.setColor(Color.YELLOW);
-	   g.drawLine(400, 150, posistionx, positiony);
-	
-	   
-	   
-   }
 
   
 	   public static void main(String[]args) {
