@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  * @author Tianxiao.Liu@u-cergy.fr
  **/
 
-public class ChronometerGUI extends JFrame implements Runnable {
+public class ChronometerWrongGUI extends JFrame implements Runnable {
 	private static final Dimension IDEAL_MAIN_DIMENSION = new Dimension(863, 750);
 	private static final Dimension IDEAL_DASHBOARD_DIMENSION = new Dimension(863, 650);
 
@@ -28,7 +28,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	/**
 	 * The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
 	 */
-	private static final int CHRONO_SPEED = 80;
+	private static final int CHRONO_SPEED = 90;
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	/**
 	 * This instance is used in the inner classes for different action listeners.
 	 */
-	private ChronometerGUI instance = this;
+	private ChronometerWrongGUI instance = this;
 
 	/**
 	 * Initial status of for the start button.
@@ -64,7 +64,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	
 	private int valchoice;
 	
-	public ChronometerGUI(String title, int newvalchoice) {
+	public ChronometerWrongGUI(String title, int newvalchoice) {
 		super(title);
 		valchoice = newvalchoice;
 		init();
@@ -75,7 +75,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	 */
 	
 	
-	private Dashboard dashboard = new Dashboard(valchoice);
+	private DashboardWrong dashboard = new DashboardWrong(valchoice);
 
 	private void init() {
 		updateValues();
@@ -143,6 +143,13 @@ public class ChronometerGUI extends JFrame implements Runnable {
 		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboard.getValueY(sec));
 	}
 	
+	private void updateValuesRocket2() {
+		int sec = acceleration.getValue();
+		dashboard.deccelerationY(sec);
+		dashboard.repaint();
+		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboard.getValueY(sec));
+	}
+	
 	private void updateValuesResetRocket() {
 		dashboard.resetY();
 		dashboard.repaint();
@@ -155,6 +162,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	public void run() {
 		System.out.println("\nThe launch has begin\n");
 		System.out.println("background code =" + valchoice);
+		int sec = acceleration.getValue();
 		while (!stop) {
 			try {
 				Thread.sleep(CHRONO_SPEED);
@@ -168,10 +176,14 @@ public class ChronometerGUI extends JFrame implements Runnable {
 			// Ensure that the chronometer is not stopped during the iteration.
 			if (!stop) {
 				updateValues();
+				if(chronometer.getMinuteInt() >= 6) {
+					updateValuesRocket2();
+				}
+				else {
 				updateValuesRocket();
+				}	
 			}
-			int sec = acceleration.getValue();
-			if (dashboard.getValueY(sec) < -120) {
+			if (dashboard.getValueY(sec) > 630) {
 				stop = true ;
 				dispose();
 				//EarthGUI ea =new EarthGUI();
@@ -212,7 +224,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 
 	public static void main(String[] args) {
 		int defaultvalchoice = 11111 ;
-		new ChronometerGUI("Succesful launch",defaultvalchoice);
+		new ChronometerWrongGUI("Launch failed",defaultvalchoice);
 	}
 
 }

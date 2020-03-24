@@ -57,7 +57,8 @@ public class MyFrame extends JFrame {
             };  
             contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));  
             contentPane.setLayout(new BorderLayout(0, 0));  
-            setContentPane(contentPane);  
+            setContentPane(contentPane); 
+            int valchoice = 0 ;
             
             JPanel panel = new JPanel();
             panel.setBackground(new Color(0,0,0,0));
@@ -68,14 +69,16 @@ public class MyFrame extends JFrame {
             JLabel lblPleaseChooseYour = new JLabel("Please choose the launch base...");
             lblPleaseChooseYour.setForeground(Color.WHITE);
             lblPleaseChooseYour.setHorizontalAlignment(SwingConstants.CENTER);
-            lblPleaseChooseYour.setBounds(10, 28, 414, 14);
+            lblPleaseChooseYour.setBounds(10, 70, 414, 14);
             panel.add(lblPleaseChooseYour);
             
             JButton btnCapCanaveral = new JButton("Cap Canaveral");        
             btnCapCanaveral.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
+            		int newvalchoice = valchoice ;
+            		newvalchoice += 1 ;
             		dispose();
-            		MyFrame2 f=new MyFrame2();
+            		MyFrame2 f=new MyFrame2(newvalchoice);
             		f.setVisible(true);
             	}
             });
@@ -87,8 +90,10 @@ public class MyFrame extends JFrame {
     		JButton btnParis = new JButton("Paris");
     		btnParis.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				int newvalchoice = valchoice ;
+            		newvalchoice += 2 ;
     				dispose();
-    				MyFrame2 f=new MyFrame2();
+    				MyFrame2 f=new MyFrame2(newvalchoice);
             		f.setVisible(true);
     			}
     		});
@@ -100,8 +105,10 @@ public class MyFrame extends JFrame {
     		JButton btnPlenord = new JButton("North-Pôle");
     		btnPlenord.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				int newvalchoice = valchoice ;
+            		newvalchoice += 3 ;
     				dispose();
-    				MyFrame2 f=new MyFrame2();
+    				MyFrame2 f=new MyFrame2(newvalchoice);
             		f.setVisible(true);
     			}
     		});
@@ -109,5 +116,18 @@ public class MyFrame extends JFrame {
     		btnPlenord.setForeground(Color.WHITE);
     		btnPlenord.setBounds(292, 142, 132, 47);
     		panel.add(btnPlenord);
+    		
+    		JButton restart = new JButton("Restart choice");
+    		restart.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				dispose();
+    				MyFrame f=new MyFrame();
+            		f.setVisible(true);
+    			}
+    		});
+    		restart.setBackground(Color.BLACK);
+    		restart.setForeground(Color.WHITE);
+    		restart.setBounds(5,5, 120, 40);
+    		panel.add(restart);
        }  
   } 

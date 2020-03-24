@@ -1,8 +1,7 @@
 package chrono;  
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;  
+import java.awt.Color;  
 import java.awt.Graphics;  
 import java.awt.Image;  
 import java.awt.Toolkit;
@@ -22,25 +21,12 @@ public class MyFrame2 extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;  
-       /**  
-        * Launch the application.  
-        */  
-       public static void main(String[] args) {  
-           EventQueue.invokeLater(new Runnable() {  
-                public void run() {  
-                     try {  
-                          MyFrame2 frame = new MyFrame2();  
-                          frame.setVisible(true);  
-                     } catch (Exception e) {  
-                           e.printStackTrace();  
-                      }  
-                 }  
-            });  
-       }  
+        
        /**  
         * Create the frame.  
         */  
-       public MyFrame2() {  
+	
+       public MyFrame2(int valchoice) {  
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
             setBounds(100, 100, 450, 300);  
             contentPane = new JPanel() {  
@@ -68,14 +54,16 @@ public class MyFrame2 extends JFrame {
             JLabel lblPleaseChooseYour = new JLabel("Which simulation do you want to purchase ? ");
             lblPleaseChooseYour.setForeground(Color.WHITE);
             lblPleaseChooseYour.setHorizontalAlignment(SwingConstants.CENTER);
-            lblPleaseChooseYour.setBounds(10, 28, 414, 14);
+            lblPleaseChooseYour.setBounds(10, 70, 414, 14);
             panel.add(lblPleaseChooseYour);
             
             JButton btnTerre = new JButton("Terre");
             btnTerre.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				int newvalchoice = valchoice ;
+            		newvalchoice += 10 ;
     				dispose();
-    				MyFrame3 f=new MyFrame3();
+    				MyFrame3 f=new MyFrame3(newvalchoice);
             		f.setVisible(true);
     			}
     		});
@@ -87,8 +75,10 @@ public class MyFrame2 extends JFrame {
     		JButton btnMars = new JButton("Mars");
     		btnMars.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				int newvalchoice = valchoice ;
+            		newvalchoice += 20 ;
     				dispose();
-    				MyFrame3 f=new MyFrame3();
+    				MyFrame3 f=new MyFrame3(newvalchoice);
             		f.setVisible(true);
     			}
     		});
@@ -96,5 +86,18 @@ public class MyFrame2 extends JFrame {
     		btnMars.setForeground(Color.WHITE);
     		btnMars.setBounds(221, 142, 128, 47);
     		panel.add(btnMars);
+    		
+    		JButton restart = new JButton("Restart choice");
+    		restart.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				dispose();
+    				MyFrame f=new MyFrame();
+            		f.setVisible(true);
+    			}
+    		});
+    		restart.setBackground(Color.BLACK);
+    		restart.setForeground(Color.WHITE);
+    		restart.setBounds(5,5, 120, 40);
+    		panel.add(restart);
        }  
   } 

@@ -16,11 +16,11 @@ import javax.swing.JPanel;
  * @author tliu@u-cergy.fr
  * 
  */
-public class Dashboard extends JPanel {
+public class DashboardWrong extends JPanel {
 	
 	private int valchoice ;
 
-	public Dashboard (int valchoice2) {
+	public DashboardWrong (int valchoice2) {
 		valchoice = valchoice2 ;
 	}
 
@@ -47,7 +47,7 @@ public class Dashboard extends JPanel {
 	String launchtext = "Click on the << Start Launch >> button and wait a few second for the start of the rocket launch ";
 	String launchtext2 = "The launch has started";
 	String launchtext3 = "The rocket is accelarating for gain enough speed in order to be able to go in the space ";
-	String launchtext4 = "The rocket has reached the speed required, now let's see what happen in the space... ";
+	String launchtext4 = "The rocket hasn't succeed to reach the speed required, now let's see why... ";
 	
 	int checkpointX = 10;
 	int checkpointY = 603;
@@ -57,9 +57,9 @@ public class Dashboard extends JPanel {
 	String checkpointName = "Step 1  ";
 	String checkpointName2 = "Step 2  ";
 	
-	private int[] r1 = {11111,11121,11211,11221,12111,12121,12211,12221,21111,21121,21211,21221,22111,22121,22211,22221};
-	private int[] r2 = {11112,11122,11212,11222,12112,12122,12212,12222,21112,21122,21212,21222,22112,22122,22212,22222};
-	private int[] r3 = {11113,11123,11213,11223,12113,12123,12213,12223,21113,21123,21213,21223,22113,22123,22213,22223};
+	private int[] arraycode1 = {11111,11121,11211,11221,12111,12121,12211,12221,21111,21121,21211,21221,22111,22121,22211,22221};
+	private int[] arraycode2 = {11112,11122,11212,11222,12112,12122,12212,12222,21112,21122,21212,21222,22112,22122,22212,22222};
+	private int[] arraycode3 = {11113,11123,11213,11223,12113,12123,12213,12223,21113,21123,21213,21223,22113,22123,22213,22223};
 	private int tabsize = 16;
 	
 	/**
@@ -100,6 +100,11 @@ public class Dashboard extends JPanel {
 		y = y-(sec/200) ;
 	}
 	
+	public void deccelerationY(int sec) {
+		y = y+(sec/200);
+		x = x-(sec/500);
+	}
+	
 	public int getValueY(int sec) {
 		return y;
 	}
@@ -117,19 +122,19 @@ public class Dashboard extends JPanel {
 		int res = 0 ;
 		
 		for (int index = 0; index < tabsize; index++) {
-            if (r1[index] == valchoice) {
+            if (arraycode1[index] == valchoice) {
             	res = 1 ;
             }
 		}
 		
 		for (int index = 0; index < tabsize; index++) {
-            if (r2[index] == valchoice) {
+            if (arraycode2[index] == valchoice) {
             	res = 2 ;
             }
 		}
         
 		for (int index = 0; index < tabsize; index++) {
-            if (r3[index] == valchoice) {
+            if (arraycode3[index] == valchoice) {
             	res = 3 ;
             }
 		}
