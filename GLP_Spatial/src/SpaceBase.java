@@ -1,7 +1,9 @@
 package glp1;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class SpaceBase extends JPanel {
@@ -12,6 +14,8 @@ public class SpaceBase extends JPanel {
     private int initial_positiony=500;
     private int positionx=0;
     private int positiony=0;
+	private ImageIcon icon2 = new ImageIcon("glp1/espace.jpg");
+	Image space = icon2.getImage(); 
     private static final long serialVersionUID = 1L;
     
 	
@@ -27,7 +31,7 @@ public class SpaceBase extends JPanel {
 
 		
 		super.paintComponent(g);	
-		
+		 g.drawImage(space,3,0,1500,1000,null);
 		 g.drawImage(Simulationutility.readImage("glp1/terre.jpg"),800,450,100,151,null);
 		 g.drawImage(Simulationutility.readImage("glp1/satellite.jpg"),initial_positionx+positionx,initial_positiony+positiony,50,75,null);
 		 
