@@ -26,8 +26,8 @@ public class MarsDashboard  extends JPanel {
     private JLabel positionearthxvlabel      = new JLabel("earth x=");
     private JLabel positionearthyvalue      = new JLabel("");
     private JLabel positionearthylabel      = new JLabel("earth y=");
-    private JLabel positionmarsxlabel      = new JLabel("");
-    private JLabel positiomarsylabel      = new JLabel("");
+    private JLabel positionmarsxlabel      = new JLabel("mars x=");
+    private JLabel positiomarsylabel      = new JLabel("mars y=");
     private JLabel positionmarsxvalue      = new JLabel("");
     private JLabel positiomarsyvalue      = new JLabel("");
 	
@@ -36,8 +36,7 @@ public class MarsDashboard  extends JPanel {
     	
     setLayout(new FlowLayout(FlowLayout.CENTER));	
     
-    earth_sun_distancelabel.setFont(font);
-    add(earth_sun_distancelabel);
+    
     
     earth_sun_distancevalue.setFont(font);
     add(earth_sun_distancevalue);
@@ -51,11 +50,16 @@ public class MarsDashboard  extends JPanel {
     positionearthxvlabel.setFont(font);
     add(positionearthxvlabel);
     
+    
+   
     positionearthxvalue.setFont(font);
     add(positionearthxvalue);
     
     positionearthylabel.setFont(font);
-    add(positionearthyvalue);
+    add(positionearthylabel);
+    
+    positionearthyvalue.setFont(font);
+    add( positionearthyvalue);
     
     positionmarsxlabel.setFont(font);
     add(positionmarsxlabel);
@@ -69,7 +73,8 @@ public class MarsDashboard  extends JPanel {
     positiomarsyvalue.setFont(font);
     add(positiomarsyvalue);
     
-    
+    earth_sun_distancelabel.setFont(font);
+    add(earth_sun_distancelabel);
 	
 	}
 	

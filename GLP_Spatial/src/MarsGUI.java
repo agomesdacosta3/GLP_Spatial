@@ -28,7 +28,7 @@ private Mars mars=new Mars();
     private double dmars=sun_ray+sun_mars_distance+mars_ray;
     private JLabel earth_sun_distancevalue = marsdashboard.getearthsundistancevalue();
     private JLabel earth_sun_distancelabel = new JLabel("");
-    private JLabel timevalue  = new JLabel("");
+    private JLabel timevalue  = marsdashboard.gettimevalue();
     private JLabel timevlabel = new JLabel("");
     private JLabel positionearthxvalue      = marsdashboard.getpositionearthxvalue();
     private JLabel positionearthxvlabel      = new JLabel("");
@@ -90,9 +90,18 @@ private Mars mars=new Mars();
      int postionyearthgui1=postionyearthgui/IHMADJUST;;
      
      
+
      /* mars.setpositionx(postionxgui);*/	
      marsdashboard.setpositionxearth(positionxearthb);
      marsdashboard.setpositionyearth(positionyearthb);
+     
+     double positionxearthkm=positionxearth/1000;
+     double positionyearthkm=positionyearth/1000;
+     
+     
+     positionearthxvalue.setText(""+positionxearthkm+"km");
+     positionearthyvalue.setText(""+positionyearthkm+"km");
+     timevalue.setText(""+t1+"seconds");
      
      /*
      
