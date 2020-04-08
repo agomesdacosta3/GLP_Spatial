@@ -28,7 +28,7 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	/**
 	 * The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
 	 */
-	private static final int CHRONO_SPEED = 80;
+	private static int CHRONO_SPEED = 90;
 
 	private static final long serialVersionUID = 1L;
 
@@ -73,9 +73,8 @@ public class ChronometerGUI extends JFrame implements Runnable {
 	/**
 	 * The dashboard part is managed in a separate class.
 	 */
-	
-	
-	private Dashboard dashboard = new Dashboard(valchoice);
+
+	private Dashboard dashboard = new Dashboard(valchoice,CHRONO_SPEED);
 
 	private void init() {
 		updateValues();
@@ -157,6 +156,9 @@ public class ChronometerGUI extends JFrame implements Runnable {
 		System.out.println("background code =" + valchoice);
 		while (!stop) {
 			try {
+				if ((dashboard.setChronoSpeed()) != CHRONO_SPEED)  {
+					CHRONO_SPEED = dashboard.setChronoSpeed() ;
+				}
 				Thread.sleep(CHRONO_SPEED);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
@@ -170,12 +172,22 @@ public class ChronometerGUI extends JFrame implements Runnable {
 				updateValues();
 				updateValuesRocket();
 			}
+			
 			int sec = acceleration.getValue();
+			
 			if (dashboard.getValueY(sec) < -120) {
 				stop = true ;
 				dispose();
-				//EarthGUI ea =new EarthGUI();
-        		//ea.setVisible(true);
+				/*
+				if ((dashboard.ChooseType()) == 1) {
+					EarthGUI earth = new EarthGUI();
+        			earth.setVisible(true);
+        		}
+        		else if ((dashboard.ChooseType()) == 2) {
+        			MarsGUI mars = new MarsGUI();
+        			mars.setVisible(true);
+        		}
+        		*/
 			}
 		}
 	}

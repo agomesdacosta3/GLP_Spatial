@@ -28,7 +28,7 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 	/**
 	 * The normal speed is 1000, e.q. one refresh per second (1000 milliseconds).
 	 */
-	private static final int CHRONO_SPEED = 90;
+	private static int CHRONO_SPEED = 90;
 
 	private static final long serialVersionUID = 1L;
 
@@ -74,8 +74,7 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 	 * The dashboard part is managed in a separate class.
 	 */
 	
-	
-	private DashboardWrong dashboard = new DashboardWrong(valchoice);
+	private DashboardWrong dashboardW = new DashboardWrong(valchoice,CHRONO_SPEED);
 
 	private void init() {
 		updateValues();
@@ -109,8 +108,8 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 
 		contentPane.add(BorderLayout.NORTH, control);
 
-		dashboard.setPreferredSize(IDEAL_DASHBOARD_DIMENSION);
-		contentPane.add(BorderLayout.SOUTH, dashboard);
+		dashboardW.setPreferredSize(IDEAL_DASHBOARD_DIMENSION);
+		contentPane.add(BorderLayout.SOUTH, dashboardW);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -130,29 +129,29 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 		CyclicCounter second = chronometer.getSecond(); 
 		secondValue.setText(second.toString() + " ");
 		
-		dashboard.setVal(valchoice);
+		dashboardW.setVal(valchoice);
 		
 		// The dashboard needs to be reprinted when hour, minute or second values change.
-		dashboard.repaint(); 
+		dashboardW.repaint(); 
 	}
 	
 	private void updateValuesRocket() {
 		int sec = acceleration.getValue();
-		dashboard.accelerationY(sec);
-		dashboard.repaint();
-		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboard.getValueY(sec));
+		dashboardW.accelerationY(sec);
+		dashboardW.repaint();
+		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboardW.getValueY(sec));
 	}
 	
 	private void updateValuesRocket2() {
 		int sec = acceleration.getValue();
-		dashboard.deccelerationY(sec);
-		dashboard.repaint();
-		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboard.getValueY(sec));
+		dashboardW.deccelerationY(sec);
+		dashboardW.repaint();
+		System.out.println("The rocket's height at " + chronometer.getHourInt() + "hour " + chronometer.getMinuteInt() + "minute and " + chronometer.getSecondInt() + "second is " + dashboardW.getValueY(sec));
 	}
 	
 	private void updateValuesResetRocket() {
-		dashboard.resetY();
-		dashboard.repaint();
+		dashboardW.resetY();
+		dashboardW.repaint();
 	}
  
 	/**
@@ -162,9 +161,12 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 	public void run() {
 		System.out.println("\nThe launch has begin\n");
 		System.out.println("background code =" + valchoice);
-		int sec = acceleration.getValue();
+		
 		while (!stop) {
 			try {
+				if ((dashboardW.setChronoSpeed()) != CHRONO_SPEED)  {
+					CHRONO_SPEED = dashboardW.setChronoSpeed() ;
+				}
 				Thread.sleep(CHRONO_SPEED);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
@@ -183,11 +185,14 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 				updateValuesRocket();
 				}	
 			}
-			if (dashboard.getValueY(sec) > 630) {
+			
+			int sec = acceleration.getValue();
+			
+			if (dashboardW.getValueY(sec) > 630) {
 				stop = true ;
 				dispose();
-				//EarthGUI ea =new EarthGUI();
-        		//ea.setVisible(true);
+				//BilanGUI b =new BilanGUI();
+        		//b.setVisible(true);
 			}
 		}
 	}
@@ -218,12 +223,13 @@ public class ChronometerWrongGUI extends JFrame implements Runnable {
 			acceleration.reset(firstCounterValue);
 			updateValues();
 			updateValuesResetRocket();
+			dashboardW.resetText();
 			System.out.println("\nThe launch has been reinitialized\n");			
 		}
 	}
 
 	public static void main(String[] args) {
-		int defaultvalchoice = 11111 ;
+		int defaultvalchoice = 21111 ;
 		new ChronometerWrongGUI("Launch failed",defaultvalchoice);
 	}
 

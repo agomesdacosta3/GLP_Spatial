@@ -96,7 +96,7 @@ public class MyFrame3 extends JFrame {
             lblPropulsionPower.setBounds(10, 111, 163, 14);
             panel.add(lblPropulsionPower);
             
-            JRadioButton rdbtnkm3 = new JRadioButton("50 km/N");
+            JRadioButton rdbtnkm3 = new JRadioButton("5000 kN");
             rdbtnkm3.setForeground(Color.WHITE);
             rdbtnkm3.setBackground(Color.BLACK);
             rdbtnkm3.setBounds(125, 107, 71, 23);
@@ -107,7 +107,7 @@ public class MyFrame3 extends JFrame {
     			}
     		});
             
-            JRadioButton rdbtnkm4 = new JRadioButton("90 km/N");
+            JRadioButton rdbtnkm4 = new JRadioButton("7500 kN");
             rdbtnkm4.setForeground(Color.WHITE);
             rdbtnkm4.setBackground(Color.BLACK);
             rdbtnkm4.setBounds(198, 107, 71, 23);

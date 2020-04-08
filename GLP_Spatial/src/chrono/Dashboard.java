@@ -19,9 +19,11 @@ import javax.swing.JPanel;
 public class Dashboard extends JPanel {
 	
 	private int valchoice ;
+	private int chronospeed;
 
-	public Dashboard (int valchoice2) {
+	public Dashboard (int valchoice2,int CHRONO_SPEED) {
 		valchoice = valchoice2 ;
+		chronospeed = CHRONO_SPEED;
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -57,10 +59,22 @@ public class Dashboard extends JPanel {
 	String checkpointName = "Step 1  ";
 	String checkpointName2 = "Step 2  ";
 	
-	private int[] r1 = {11111,11121,11211,11221,12111,12121,12211,12221,21111,21121,21211,21221,22111,22121,22211,22221};
-	private int[] r2 = {11112,11122,11212,11222,12112,12122,12212,12222,21112,21122,21212,21222,22112,22122,22212,22222};
-	private int[] r3 = {11113,11123,11213,11223,12113,12123,12213,12223,21113,21123,21213,21223,22113,22123,22213,22223};
-	private int tabsize = 16;
+	private int[] arraycode1 = {11111,11121,11211,11221,12111,12121,12211,12221,21111,21121,21211,21221,22111,22121,22211,22221};	//Cap Canaveral
+	private int[] arraycode2 = {11112,11122,11212,11222,12112,12122,12212,12222,21112,21122,21212,21222,22112,22122,22212,22222};	//Paris
+	private int[] arraycode3 = {11113,11123,11213,11223,12113,12123,12213,12223,21113,21123,21213,21223,22113,22123,22213,22223};	//North-Pôle
+	private int tabgroup1size = 16;
+	
+	private int[] arraycode4 = {11111,11112,11113,11121,11122,11123,12111,12112,12113,12121,12122,12123,21111,21112,21113,21121,21122,21123,22111,22112,22113,22121,22122,22123};
+	private int[] arraycode5 = {11211,11212,11213,11221,11222,11223,12211,12212,12213,12221,12222,12223,21211,21212,21213,21221,21222,21223,22211,22212,22213,22221,22222,22223};
+	private int tabgroup2size = 24;
+	
+	private int[] arraycode6 = {11111,11112,11113,11121,11122,11123,11211,11212,11213,11221,11222,11223,21111,21112,21113,21121,21122,21123,21211,21212,21213,21221,21222,21223};
+	private int[] arraycode7 = {12111,12112,12113,12121,12122,12123,12211,12212,12213,12221,12222,12223,22111,22112,22113,22121,22122,22123,22211,22212,22213,22221,22222,22223};
+	private int tabgroup3size = 24;
+	
+	private int[] arraycode8 = {11111,11112,11113,11211,11212,11213,12111,12112,12113,12211,12212,12213,21111,21112,21113,21211,21212,21213,22111,22112,22113,22211,22212,22213};	//Terre
+	private int[] arraycode9 = {11121,11122,11123,11221,11222,11223,12121,12122,12123,12221,12222,12223,21121,21122,21123,21221,21222,21223,22121,22122,22123,22221,22222,22223};	//Mars
+	private int tabgroup4size = 24;
 	
 	/**
 	 * Defines what to do when the repaint() method is called.
@@ -96,8 +110,31 @@ public class Dashboard extends JPanel {
 		
 	}
 	
-	public void accelerationY(int sec) {
-		y = y-(sec/200) ;
+	public void accelerationY(int sec) { // gère le choix de la puissance de propulsion
+		
+		int acceleration = sec/200;
+		int res = 0 ;
+		
+		for (int index = 0; index < tabgroup3size; index++) {
+            if (arraycode6[index] == valchoice) {
+            	res = 6 ;
+            }
+		}
+		
+		for (int index = 0; index < tabgroup3size; index++) {
+            if (arraycode7[index] == valchoice) {
+            	res = 7 ;
+            }
+		}
+		
+		if (res == 6) {
+			// Il n'est pas nécessaire de changer la valeur de la variable acceleration
+		}
+		else if (res == 7)  {
+			acceleration = sec/150;
+		}
+		
+		y = y-acceleration ;
 	}
 	
 	public int getValueY(int sec) {
@@ -112,24 +149,24 @@ public class Dashboard extends JPanel {
 		valchoice = newval ;
 	}
 	
-	public Image ChooseBackground(Image realbackground) {
+	public Image ChooseBackground(Image realbackground) { // gère le choix de la base de lancement
 		
 		int res = 0 ;
 		
-		for (int index = 0; index < tabsize; index++) {
-            if (r1[index] == valchoice) {
+		for (int index = 0; index < tabgroup1size; index++) {
+            if (arraycode1[index] == valchoice) {
             	res = 1 ;
             }
 		}
 		
-		for (int index = 0; index < tabsize; index++) {
-            if (r2[index] == valchoice) {
+		for (int index = 0; index < tabgroup1size; index++) {
+            if (arraycode2[index] == valchoice) {
             	res = 2 ;
             }
 		}
         
-		for (int index = 0; index < tabsize; index++) {
-            if (r3[index] == valchoice) {
+		for (int index = 0; index < tabgroup1size; index++) {
+            if (arraycode3[index] == valchoice) {
             	res = 3 ;
             }
 		}
@@ -144,6 +181,59 @@ public class Dashboard extends JPanel {
 			realbackground = northpole ;
 		}
 		return realbackground ;
+	}
+	
+	public int setChronoSpeed () { // gère le choix de la vitesse de la fusee 
+		
+		int res = 0 ;
+		
+		for (int index = 0; index < tabgroup2size; index++) {
+            if (arraycode4[index] == valchoice) {
+            	res = 4 ;
+            }
+		}
+		
+		for (int index = 0; index < tabgroup2size; index++) {
+            if (arraycode5[index] == valchoice) {
+            	res = 5 ;
+            }
+		}
+		
+		if (res == 4) {
+			//Il n'est pas nécessaire de changer la valeur du chronospeed
+		}
+		else if (res == 5)  {
+			chronospeed = 50;
+		}
+		
+		return chronospeed ;
+	}
+	
+	public int ChoiceType () {  // gère le choix du type de simulation
+		
+		int res = 0 ;
+		int type = 0 ;
+		
+		for (int index = 0; index < tabgroup4size; index++) {
+            if (arraycode8[index] == valchoice) {
+            	res = 8 ;
+            }
+		}
+		
+		for (int index = 0; index < tabgroup4size; index++) {
+            if (arraycode9[index] == valchoice) {
+            	res = 9 ;
+            }
+		}
+		
+		if (res == 8) {
+			type = 1;
+		}
+		else if (res == 9)  {
+			type = 2;
+		}
+		
+		return type ;
 	}
 
 }
