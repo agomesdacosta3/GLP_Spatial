@@ -13,14 +13,22 @@ import javax.swing.JLabel;
 public class MarsGUI extends JFrame implements Runnable {
 
 private static final long serialVersionUID = 1L;
-private MarsDashboard marsdashboard=new MarsDashboard();
+
+
+private int valchoice;
+
+private MarsDashboard marsdashboard=new MarsDashboard(valchoice);
+private int valchoicedash=marsdashboard.getvalchoice();
 private Mars mars=new Mars();
  private MarsGUI instance=this;
  private Counter chrono=new Counter(0);
  int t=chrono.getValue();
- private int IHMADJUST=500000000;/* A unite IHM graphique 1000 000 000 m*/
-	private double sun_mars_distance=55*Math.pow(10,9);/*m*/
-	private double sun_earth_distance=1.496*Math.pow(10,11);/*m*/
+ private int IHMADJUST=1000000000;/* A unite IHM graphique 1000 000 000 m*/
+ private int MARSIHMADJUST=1000000000;	   
+ private double ROCKETUHMADJUST=1
+		 *Math.pow(10,17);
+ private double sun_mars_distance=22794*Math.pow(10,7);/*m*/
+	private double sun_earth_distance=149597870*Math.pow(10,3);/*m*/
 	private double earth_ray=6.525*Math.pow(10, 6);/*m*/
 	private double mars_ray=3.396*Math.pow(10,6);/*m*/
 	private double sun_ray=6.525*Math.pow(10, 8);
@@ -37,14 +45,23 @@ private Mars mars=new Mars();
     private JLabel positiomarsylabel      = new JLabel("");
     private JLabel positionmarsxvalue      = new JLabel("");
     private JLabel positiomarsyvalue      = new JLabel("");
-    private MarsGUI() {
+    private int speed=10200;
+    private int weight;
+    private int power;
+    
+    
+  
+    
+    public MarsGUI() {
 	
+ 
+    	
 	Container contentPane = getContentPane();
 	contentPane.setLayout(new BorderLayout());
 	
 	contentPane.add(BorderLayout.CENTER, marsdashboard);	
 	
-	setSize(SimuPara.WINDOW_WIDTH, SimuPara.WINDOW_HEIGHT);
+	setSize(SimuPara.WINDOW_MARS_WIDTH, SimuPara.WINDOW_MARS_HEIGHT);
     
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	setVisible(true);
@@ -54,23 +71,50 @@ private Mars mars=new Mars();
 	
 	
 }
-  private void init() {
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+
+  
+  public void landed() {
+		
+		if(((750+marsdashboard.getpositionxearth()+marsdashboard.getrocketpositionx())==(755+marsdashboard.getpositionxmars()))&&((390+marsdashboard.getpositionyearth()+marsdashboard.getrocketpositiony())==(390+marsdashboard.getpositionymars()))) {
+			
+			
+		dispose();
+		}	
   }
+
     
+  
+	private double angelradian(double angle) {
+		
+		
+	return (2*Math.PI*angle)/360;	
+		
+	}
+	
+  
+  private void updateValuesmars(int t) {
+    	  
+	  int t2=t*50000;
+	  double angle=mars.marsrotativetrajectory(t2);
+	
+	  double positionmarsx=dmars*Math.cos(angle);
+	  double positionmarsy=dmars*Math.sin(angle); 	  
+	  double positionmarsxa=positionmarsx/MARSIHMADJUST;
+	  double positionmarsya=positionmarsy/MARSIHMADJUST;
+      int    positionmarsxb=(int)positionmarsxa;    
+      int    positionmarsyb=(int)positionmarsya;    
+	  
+      
+      marsdashboard.setpositionx(positionmarsxb);
+      marsdashboard.setpositiony(positionmarsyb);
+  
+	
+	
+  }
     
   private void updateValues(int t) {
 	
-	/* double postionxmars=mars.calculatepositionxmars(t); 
-	 double postionymars=mars.calculatepositionymars(t);  
-	 int postionxearthgui=(int)(mars.calculatepositionxearth(t));	
-     */
+	
 	  
 	 int t1=1000000*t;
 	 double positionxearth=dearth*Math.cos(mars.earthrotativetrajectory(t1));
@@ -79,19 +123,27 @@ private Mars mars=new Mars();
 	 double positionyeartha=positionyearth/IHMADJUST;		 
 	 int positionxearthb=(int)positionxeartha;
 	 int positionyearthb=(int)positionyeartha;
-	 
+	
 	 int postionxearthgui=/*(int)(mars.calculatepositionxearth(t));*/(int)(dearth*Math.cos(mars.earthrotativetrajectory(t1)));
      int postionyearthgui=/*(int)(mars.calculatepositionyearth(t));*/(int)(dearth*Math.sin(mars.earthrotativetrajectory(t1)));
      int postionxmarsgui=/*(int)(mars.calculatepositionxmars(t));*/	 (int)(dmars*Math.cos(mars.marsrotativetrajectory(t1)));
      int postionymarsgui=/*(int)(mars.calculatepositionymars(t));*/   (int)(dmars*Math.sin(mars.marsrotativetrajectory(t1)));
-     int positionxmarsgui1=postionxmarsgui/IHMADJUST;
-     int positionymarsgui1=postionymarsgui/IHMADJUST;
-     int postionxearthgui1=postionxearthgui/IHMADJUST;;	
-     int postionyearthgui1=postionyearthgui/IHMADJUST;;
+   
+     int weight1 = marsdashboard.weightchoose();
+     int power1  = marsdashboard.powerchoose();
+     double positionrocketx=mars.calculatepositionxrocket( 5000000,50000,speed, t1);
+     double positionrockety=mars.calculatepositionyrocket( 5000000,50000, speed, t1); 
+ 
+     double positionxrocketa=positionrocketx/ROCKETUHMADJUST;
+	 double positionyrocketa=positionrockety/ROCKETUHMADJUST;	
      
-     
-
-     /* mars.setpositionx(postionxgui);*/	
+	 int positionxrocketb=(int)positionxrocketa;
+	 int positionyrocketb=(int)positionyrocketa;
+	    System.out.println("x="+positionxrocketb+" y="+positionyrocketb+" t="+t1+"poids "+weight1+"puissance="+power1+" valchoice= "+valchoice+" valchoicedash="+valchoicedash+" ");
+	 
+	 marsdashboard.setrocketpositionx(positionxrocketb);
+	 marsdashboard.setrocketpositiony(positionyrocketb);
+	 
      marsdashboard.setpositionxearth(positionxearthb);
      marsdashboard.setpositionyearth(positionyearthb);
      
@@ -102,28 +154,35 @@ private Mars mars=new Mars();
      positionearthxvalue.setText(""+positionxearthkm+"km");
      positionearthyvalue.setText(""+positionyearthkm+"km");
      timevalue.setText(""+t1+"seconds");
-     
-     /*
-     
-     marsdashboard.setpositionx(positionxmarsgui1);
-     marsdashboard.setpositiony(positionymarsgui1);
-     
-    
-     /* mars.setpositionx(postionygui);	*/
-   
-	/* double resultx=mars.getpositionx();
-	 double resulty=mars.getpositiony();*/
+     double result=mars.calculatedistanceearthmars(t);
+	  int t2=t*1000000;
+			  
+			  
+			  
+	  double angle=mars.marsrotativetrajectory(t2);
 	
-    System.out.println(" temps="+t1+"positionxearth="+positionxearthb+"  positionyearth="+positionyearthb+"dearth="+dearth+"xmars="+positionxmarsgui1+"ymars"+positionymarsgui1+" "); 
-}
+	  double positionmarsx=dmars*Math.cos(angle);
+	  double positionmarsy=dmars*Math.sin(angle); 	  
+	  double positionmarsxa=positionmarsx/MARSIHMADJUST;
+	  double positionmarsya=positionmarsy/MARSIHMADJUST;
+      int    positionmarsxb=(int)positionmarsxa;    
+      int    positionmarsyb=(int)positionmarsya;    
+	  
+     
+     marsdashboard.setpositionx(positionmarsxb);
+     marsdashboard.setpositiony(positionmarsyb);
+     double speed=mars.getmarsangularspeed();
+    /* System.out.println("temps"+t2+"x="+positionrocketx+"y="+positionrockety+"speed="+speed+"d terre mars"+dmars+"");
+    */
+  }
   
   
   
   
   
-  
+ 
 public static void main(String[] args) {
-
+    
 	new MarsGUI();
 
 }
@@ -132,7 +191,7 @@ public static void main(String[] args) {
 	int time = 0;
 	while (time <= SimulInformation.SIMULATION_MARS_DURATION) {
 	 
-	Simulationutility.unitTime();
+	Simulationutility.marsUnitTime();
 	 chrono.increment();
      t=chrono.getValue();	
 		
@@ -140,7 +199,7 @@ public static void main(String[] args) {
 	 double result= mars.calculatedistanceearthmars(t);
 	 marsdashboard.repaint();
 	 time++;
-	
+	 landed();
 	 /*
 	 System.out.println("t= "+t+"positionx= "+mars.calculatepositionxmars(t)+"positiony= "+mars.calculatepositionymars(t)+"distance="+result+"average=");
 	 */
