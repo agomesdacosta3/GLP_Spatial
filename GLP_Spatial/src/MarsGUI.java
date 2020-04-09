@@ -25,15 +25,17 @@ private Mars mars=new Mars();
  int t=chrono.getValue();
  private int IHMADJUST=1000000000;/* A unite IHM graphique 1000 000 000 m*/
  private int MARSIHMADJUST=1000000000;	   
- private double ROCKETUHMADJUST=1
-		 *Math.pow(10,17);
+ private double ROCKETUHMADJUST=5*Math.pow(10,16);
  private double sun_mars_distance=22794*Math.pow(10,7);/*m*/
 	private double sun_earth_distance=149597870*Math.pow(10,3);/*m*/
 	private double earth_ray=6.525*Math.pow(10, 6);/*m*/
 	private double mars_ray=3.396*Math.pow(10,6);/*m*/
 	private double sun_ray=6.525*Math.pow(10, 8);
     private double dearth=sun_ray+sun_earth_distance+earth_ray;
+    private int t1=1000000*t;
+    private double earth_marswithouth_ray=mars.calculatedistanceearthmars(t1);
     private double dmars=sun_ray+sun_mars_distance+mars_ray;
+    private double dearth_mars=mars_ray+earth_ray+earth_marswithouth_ray;
     private JLabel earth_sun_distancevalue = marsdashboard.getearthsundistancevalue();
     private JLabel earth_sun_distancelabel = new JLabel("");
     private JLabel timevalue  = marsdashboard.gettimevalue();
@@ -131,15 +133,19 @@ private Mars mars=new Mars();
    
      int weight1 = marsdashboard.weightchoose();
      int power1  = marsdashboard.powerchoose();
-     double positionrocketx=mars.calculatepositionxrocket( 5000000,50000,speed, t1);
-     double positionrockety=mars.calculatepositionyrocket( 5000000,50000, speed, t1); 
+
+     double positionrocketx=mars.calculatepositionxrocket( 5000000,500000,speed, t1);
+     double positionrockety=mars.calculatepositionyrocket( 5000000,500000, speed, t1); 
  
      double positionxrocketa=positionrocketx/ROCKETUHMADJUST;
 	 double positionyrocketa=positionrockety/ROCKETUHMADJUST;	
      
+	 double simultated_distance=Math.sqrt(Math.pow(positionrocketx,2)+Math.pow(positionrockety,2) );
+	 
+	 
 	 int positionxrocketb=(int)positionxrocketa;
 	 int positionyrocketb=(int)positionyrocketa;
-	    System.out.println("x="+positionxrocketb+" y="+positionyrocketb+" t="+t1+"poids "+weight1+"puissance="+power1+" valchoice= "+valchoice+" valchoicedash="+valchoicedash+" ");
+	 System.out.println("x="+positionrocketx+" y="+positionrockety+" t="+t1+"poids "+weight1+"puissance="+power1+"simultation="+simultated_distance+" distance terre mars "+dearth_mars+"");
 	 
 	 marsdashboard.setrocketpositionx(positionxrocketb);
 	 marsdashboard.setrocketpositiony(positionyrocketb);

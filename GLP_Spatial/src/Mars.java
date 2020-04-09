@@ -44,7 +44,7 @@ public class Mars   {
    public double calculatepositionxrocket(int power,int weight,int speed,int t) {
     	
     	
-    return ((power*Math.cos(angle))/weight)*(Math.pow(t,2)/2)+speed*Math.cos(angle)*t/*-(universal_gravity_constant*earth_weight*Math.cos(angle))*/;	
+    return ((power*Math.cos(angle))/weight/*-(earth_weight/Math.pow(earthmarsdistance,2) )*/)*(Math.pow(t,2)/2)+speed*Math.cos(angle)*t/*-(universal_gravity_constant*earth_weight*Math.cos(angle))*/;	
     	
     	
     }
@@ -52,10 +52,10 @@ public class Mars   {
    public double calculatepositionyrocket(int power,int weight,int speed,int t) {
    	
    	
-	    return ((power*Math.sin(angle))/weight)*(Math.pow(t,2)/2)+speed*Math.sin(angle)*t/*-(universal_gravity_constant*earth_weight*Math.cos(angle))*/;	
+	    return ((power*Math.sin(angle))/weight/*-(earth_weight/Math.pow(earthmarsdistance,2) )*/)*(Math.pow(t,2)/2)+speed*Math.sin(angle)*t/*-(universal_gravity_constant*earth_weight*Math.cos(angle))*/;	
 	    	
 	    	
-	 }
+  }
    
 	
 	
