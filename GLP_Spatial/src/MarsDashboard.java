@@ -21,7 +21,9 @@ public class MarsDashboard  extends JPanel {
     private int rocketpositiony=0;
 	private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
     private JLabel earth_sun_distancevalue = new JLabel("");
-    private JLabel earth_sun_distancelabel = new JLabel("earth_sun distance");
+    private JLabel earth_sun_distancelabel = new JLabel("earth_sun distance=");
+    private JLabel earth_mars_distancelabel = new JLabel("earth_mars distance=");
+    private JLabel earth_mars_distancevalue = new JLabel("");
     private JLabel timevalue  = new JLabel("");
     private JLabel timelabel = new JLabel("time");
 	private JLabel positionearthxvalue      = new JLabel("");
@@ -81,20 +83,55 @@ public class MarsDashboard  extends JPanel {
     
     earth_sun_distancelabel.setFont(font);
     add(earth_sun_distancelabel);
+    
+    earth_sun_distancevalue.setFont(font);
+    add(earth_sun_distancevalue);    
+	
+    earth_mars_distancelabel.setFont(font);
+    add(earth_mars_distancelabel);
+    
+    earth_mars_distancevalue.setFont(font);
+    add(earth_mars_distancevalue);
+	
+	
 	
 	}
 	
-	private int[] r4=  {21111,21123,21213,21223,22113,22123,22213,22223,21113,21123,21213,21223,22113,22123,22213,22223};/*750T*/
-	private int[] r5 = {11111,11121,11211,11221,12111,12121,12211,12221,11111,11121,11211,11221,12111,12121,12211,12221};/*500T*/
-	private int[] r6 = {11111,21121,11211,21221,11111,21121,11211,21221,11113,11223,21223,21223,11112,21112,11222,21222};/*5000kn*/
-	private int[] r7 = {12111,22121,12211,22221,12111,22121,12211,22221,12113,12223,22223,22223,12112,22112,12222,22222};/*9000kn*/
-	 private int tabsize = 16;
-	
+	private int[] r4=  {21111,21112,21113,21121,21122,21123,21211,21212,21213,21221,21222,21223,22111,22112,22113,22121,22122,22123,22211,22212,22213,22221,22222,22223};/*750T*//*21111,21123,21213,21223,22113,22123,22213,22223,21113,21123,21213,21223,22113,22123,22213,22223*/
+	private int[] r5 = {11111,11112,11113,11121,11122,11123,11211,11212,11213,11221,11222,11223,12111,12112,12113,12121,12122,12123,12211,12212,12213,12221,12222,12223};/*500T*//*11111,11121,11211,11221,12111,12121,12211,12221,11111,11121,11211,11221,12111,12121,12211,12221*/
+	private int[] r6 = {11111,11112,11113,11121,11122,11123,11211,11212,11213,11221,11222,11223,21111,21112,21113,21121,21122,21123,21111,21212,21213,21221,21222,21223 /*11111,21121,11211,21221,11111,21121,11211,21221,11113,11223,21223,21223,11112,21112,11222,21222*//*11111,21121,11211,21221,11111,21121,11211,21221,11113,11223,21223,21223,11112,21112,11222,21222/*11111,21121,11211,21221,11111,21121,11211,21221,11113,11223,21223,21223,11112,21112,11222,21222,1,21123,11123,11122,21122*/};/*5000kn*/
+	private int[] r7 = {12111,12112,12113,12121,12122,12123,12211,12212,12213,12221,12222,12223,22111,22112,22113,22121,22122,22123,22211,22212,22213,22221,22222,22223/*12111,22121,12211,22221,12111,22121,12211,22221,12113,12223,22223,22223,12112,22112,12222,22222 ,12111,22121,12211,22221,12111,12211,22221,12113,12223,22223,22223,12112,22112,12222,22222,1,12212,22212,12122,22122,12213*/};/*9000kn*/
+	 private int weighttabsize = 24;
+	 private int powertabsize  = 24;
 	 public int getvalchoice() {
 		
 	  return valchoice;	
 	 	
 	 }
+	 
+	 public JLabel  getpositionmarsxvalue(){
+		 
+		 
+	 return positionmarsxvalue	; 
+		 
+	 }
+	 
+	 
+     public JLabel  getpositionmarsyvalue(){
+		 
+		 
+	return positiomarsyvalue ;	 
+		 
+	 }
+	 
+	 
+	 public JLabel getearthmarsdistancevalue() {
+			
+			
+			return earth_mars_distancevalue; 	
+				
+     }
+	 
 	 
 	 public JLabel getearthsundistancevalue() {
 		
@@ -131,10 +168,22 @@ public class MarsDashboard  extends JPanel {
 		 g.drawImage(Simulationutility.readImage("glp1/terre.jpg"),750+earthpositionx,400+earthpositiony,25,50,null);
 		 g.drawImage(Simulationutility.readImage("glp1/soleil.jpg"),750,400,75,100,null);
 		 g.drawImage(Simulationutility.readImage("glp1/mars.jpg"),750+marspositionx,390+marspositiony,25,50,null);
-		 g.drawImage(Simulationutility.readImage("glp1/fusee2.jpg"),755+earthpositionx+rocketpositionx,390+earthpositiony+rocketpositiony,10,20,null);
-		 /*g.drawLine(100, 700, 100, 600);
-		 g.drawLine(100, 700, 200, 700);
-		 */
+		 g.drawImage(Simulationutility.readImage("glp1/fusee.jpg"),755+earthpositionx+rocketpositionx,390+earthpositiony+rocketpositiony,10,20,null);
+		 g.drawLine(100, 700, 100, 600);/*ordonnée*/
+		
+		 g.drawLine(70, 630, 100, 600);/*fleche*/
+		 g.drawLine(100, 600, 130, 630);
+		 g.drawLine(100, 590, 100, 580);/*y*/
+		 g.drawLine(100, 580, 90, 570);
+		 g.drawLine(100, 580, 110, 570);
+		 
+		 g.drawLine(100, 700, 200, 700);/*absysse*/
+		 g.drawLine(170, 730, 200, 700);/*fleche*/
+		 g.drawLine(200, 700, 170, 670);
+		 
+		 g.drawLine(210, 690, 220,710 );
+		 g.drawLine(210,710,220,690);
+		 
 	
 		 
 		 
@@ -225,11 +274,11 @@ public class MarsDashboard  extends JPanel {
     	
     }
 
-    public int weightchoose() {
+    public int weightchoose(int valchoice) {
  	     int weight=0;
  	    		 
 		 int res=0;
-		 for (int index = 0; index < tabsize; index++) {
+		 for (int index = 0; index < weighttabsize; index++) {
 				
 			 if (r4[index] == valchoice) {
 	            	res = 1 ;
@@ -237,7 +286,7 @@ public class MarsDashboard  extends JPanel {
 			 
 		 }
 		 
-		 for (int index = 0; index < tabsize; index++) {
+		 for (int index = 0; index < weighttabsize; index++) {
 		 
 			 if (r5[index] == valchoice) {
 	            	res = 2 ;
@@ -258,17 +307,17 @@ public class MarsDashboard  extends JPanel {
 		
 		
 	}
-	public int powerchoose() {
+	public int powerchoose(int valchoice) {
 		int res= 0;
 		int power=0;
-		for (int index = 0; index < tabsize; index++) {
+		for (int index = 0; index < powertabsize; index++) {
 			
 			 if (r6[index] == valchoice) {
 	            	res = 1 ;
 	          }
 		}
 		
-		for (int index = 0; index < tabsize; index++) {
+		for (int index = 0; index < powertabsize; index++) {
 		 
 			 if (r7[index] == valchoice) {
 	            	res = 2 ;
