@@ -98,10 +98,10 @@ private Mars mars=new Mars();
   public void tuchsun() {
 	    int positionxrocket=750+marsdashboard.getpositionxearth()+marsdashboard.getrocketpositionx();
 		int positionyrocket=390+marsdashboard.getpositionyearth()+marsdashboard.getrocketpositiony(); 	 
-	    int sunminx=725;
-	    int sunminy=385;
-	    int sunmaxx=825;
-	    int sunmaxy=485;
+	    int sunminx=730;
+	    int sunminy=390;
+	    int sunmaxx=800;
+	    int sunmaxy=490;
 	  if(((positionxrocket<sunmaxx)&&(positionyrocket<sunmaxy))&&((positionxrocket>sunminx )&& (positionyrocket>sunminy  ) )) {
 	  
 	  
