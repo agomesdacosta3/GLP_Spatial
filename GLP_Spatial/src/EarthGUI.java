@@ -41,7 +41,7 @@ import javax.swing.JPanel;
      private JLabel timelabel = new JLabel("time (secondes)");
  	 private JPanel pan = new JPanel();
  	 private EarthGUI instance=this;
- 	 
+     
  	 
  	 private static Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);
  	 public EarthGUI(String title) {
@@ -58,6 +58,8 @@ import javax.swing.JPanel;
 		setSize(SimuPara.WINDOW_WIDTH, SimuPara.WINDOW_HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		
 		
 		Thread chronoThread = new Thread(instance);
 		chronoThread.start();
@@ -109,7 +111,9 @@ import javax.swing.JPanel;
 
 	}
 	 
-	 private void updatevalues() {
+
+	 
+	private void updatevalues() {
 	
 	double angle=sonde.rotativetrajectory(t);	 
 	int positionx=(int)(earth_ray*Math.cos(sonde.rotativetrajectory(t)));	 
@@ -118,14 +122,13 @@ import javax.swing.JPanel;
 	int positiony1=positiony/IHMADJUST;
 	space.setpositionx(positionx1);
 	space.setpositiony(positiony1);
-	
-	anglevalue.setText(""+angle+"");
+	                                            
+	anglevalue.setText(""+angle+""); 
 	positionxvalue.setText(""+positionx+"");	 
 	positionyvalue.setText(""+positiony+"");		 
+	                                                                           
 	
-	 
-	
-	 }
+	}
 		public static void main(String[] args) {
 
 			new EarthGUI("marslaunch");
@@ -143,6 +146,9 @@ import javax.swing.JPanel;
 			updatevalues();
 			time++;
 		    chronometre.increment();
+		    
+		    
+		    
 		    t=chronometre.getValue();
 		   
 		    timevalue.setText(""+t+"");   

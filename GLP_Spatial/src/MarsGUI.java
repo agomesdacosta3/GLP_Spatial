@@ -106,12 +106,16 @@ private Mars mars=new Mars();
 	  
 	  
        dispose();	  
-	 
-     
+      /*ReportGUI report=new ReportGUI("titre2",valchoice) 
+       * report.serVisible(true);
+       */
+       
+       MarsSpaceCraftGUI marsSpaceCraftGUI  =new MarsSpaceCraftGUI(valchoice);
+       marsSpaceCraftGUI.setVisible(true);
 	}
 	/*  System.out.println("   xrocket="+positionxrocket+">maxmarsy"+sunmaxy+"&&   yrocket"+positionyrocket+"> marsmaxx "+sunmaxx+" xrocket= "+positionxrocket+" < marsminx="+sunminx+"  positionyrocket= "+positionyrocket+" <marsminy="+sunminy+" ");
   */
-  }
+ }
   
   
     
@@ -235,15 +239,17 @@ private Mars mars=new Mars();
      double positionxearthkm=positionxearth/1000;
      double positionyearthkm=positionyearth/1000;
      double distance_earth_mars=mars.calculatedistanceearthmars(t);
-     /*
+    
      positionearthxvalue.setText(""+positionxearthkm+"km");
      positionearthyvalue.setText(""+positionyearthkm+"km");
+     System.out.println(" earthx="+positionxearthkm+"  earthy="+positionyearthkm+"");
+     /*
      earth_mars_distancevalue.setText(""+distance_earth_mars+"km");
      
-    
+    */
      
      timevalue.setText(""+t1+"seconds");
-     */
+     
      
      double result=mars.calculatedistanceearthmars(t);
 	  int t2=t*1000000;
@@ -258,12 +264,16 @@ private Mars mars=new Mars();
 	  double positionmarsya=positionmarsy/MARSIHMADJUST;
       int    positionmarsxb=(int)positionmarsxa;    
       int    positionmarsyb=(int)positionmarsya;    
-	
-      positionmarsxvalue.setText(""+positionmarsx+"");
-      positiomarsyvalue.setText(""+positionmarsy+"");
-      
-      
+      double positionmarsxkm=positionmarsx/1000;
+	  double positionmarsykm=positionmarsy/1000;
+     /* positionearthxvalue.setText("");
+      positionearthyvalue.setText("");*/
+      positionmarsxvalue.setText(""+positionmarsxkm+"km");
+      positiomarsyvalue.setText(""+positionmarsykm+"km");
+      earth_mars_distancevalue.setText(""+ result + "km");
+      earth_sun_distancevalue.setText(" 150 million kilometer ");
      
+      
      marsdashboard.setpositionx(positionmarsxb);
      marsdashboard.setpositiony(positionmarsyb);
      double speed=mars.getmarsangularspeed();
@@ -299,7 +309,7 @@ public static void main(String[] args) {
 	 time++;
 	 landed();
 	/* failmission();*/
-	 tuchsun();
+	 tuchsun(); 
 	 /*
 	 System.out.println("t= "+t+"positionx= "+mars.calculatepositionxmars(t)+"positiony= "+mars.calculatepositionymars(t)+"distance="+result+"average=");
 	 */
